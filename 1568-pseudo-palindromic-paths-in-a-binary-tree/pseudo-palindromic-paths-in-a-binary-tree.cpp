@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    int findall(TreeNode* root, vector<int>&mp)
+    int findall(TreeNode* root, int res)
     {
         if(!root)
         {
@@ -19,27 +19,43 @@ public:
         }
         if(!root->left and !root->right)
         {
-            mp[root->val]++;
+           if(res&(1<<root->val))
+           {
+               res-=(1<<root->val);
+           }
+           else res+=1<<root->val;
             int f=0;
-            for(auto it : mp)
+            for(int i=0;i<=9;i++)
             {
-                if(it%2)
+                if(res&(1<<i))
                 {
                     if(!f)f=1;
-                    else {mp[root->val]--;return 0;}
+                    else {res-=(1<<i);return 0;}
                 }
             }
-             mp[root->val]--;
+            if(res&(1<<root->val))
+           {
+               res-=(1<<root->val);
+           }
+           else res+=1<<root->val;
             return 1;
         }
-        mp[root->val]++;
-        int l=findall(root->left,mp);
-        int r=findall(root->right,mp);
-        mp[root->val]--;
+        if(res&(1<<root->val))
+           {
+               res-=(1<<root->val);
+           }
+        else res+=1<<root->val;
+        int l=findall(root->left,res);
+        int r=findall(root->right,res);
+       if(res&(1<<root->val))
+           {
+               res-=(1<<root->val);
+           }
+           else res+=1<<root->val;
         return l+r;
     }
     int pseudoPalindromicPaths (TreeNode* root) {
-       vector<int>mp(10,0);
-       return findall(root,mp);
+     int res=0;
+       return findall(root,res);
     }
 };
