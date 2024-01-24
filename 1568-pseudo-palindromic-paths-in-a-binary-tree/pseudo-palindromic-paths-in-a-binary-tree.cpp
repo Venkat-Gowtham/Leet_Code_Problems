@@ -19,11 +19,7 @@ public:
         }
         if(!root->left and !root->right)
         {
-           if(res&(1<<root->val))
-           {
-               res-=(1<<root->val);
-           }
-           else res+=1<<root->val;
+           res=res^(1<<root->val);
             int f=0;
             for(int i=0;i<=9;i++)
             {
@@ -33,25 +29,13 @@ public:
                     else {res-=(1<<i);return 0;}
                 }
             }
-            if(res&(1<<root->val))
-           {
-               res-=(1<<root->val);
-           }
-           else res+=1<<root->val;
+            res=res^(1<<root->val);
             return 1;
         }
-        if(res&(1<<root->val))
-           {
-               res-=(1<<root->val);
-           }
-        else res+=1<<root->val;
+       res=res^(1<<root->val);
         int l=findall(root->left,res);
         int r=findall(root->right,res);
-       if(res&(1<<root->val))
-           {
-               res-=(1<<root->val);
-           }
-           else res+=1<<root->val;
+      res=res^(1<<root->val);
         return l+r;
     }
     int pseudoPalindromicPaths (TreeNode* root) {
