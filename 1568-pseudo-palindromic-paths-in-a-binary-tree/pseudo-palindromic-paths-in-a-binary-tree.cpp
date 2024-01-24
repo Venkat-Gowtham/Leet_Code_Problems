@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    int findall(TreeNode* root, map<int,int>&mp)
+    int findall(TreeNode* root, vector<int>&mp)
     {
         if(!root)
         {
@@ -23,7 +23,7 @@ public:
             int f=0;
             for(auto it : mp)
             {
-                if(it.second%2)
+                if(it%2)
                 {
                     if(!f)f=1;
                     else {mp[root->val]--;return 0;}
@@ -39,7 +39,7 @@ public:
         return l+r;
     }
     int pseudoPalindromicPaths (TreeNode* root) {
-        map<int,int>mp;
+       vector<int>mp(10,0);
        return findall(root,mp);
     }
 };
