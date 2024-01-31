@@ -3,12 +3,12 @@ public:
     vector<int> dailyTemperatures(vector<int>& temp) {
         stack<int>st;
         int n=temp.size();
-        vector<int>res;
+        vector<int>res(n,0);
         for(int i=n-1;i>=0;i--)
         {
             if(st.empty())
             {
-                res.push_back(0);
+                res[i]=0;
                 st.push(i);
             }
             else
@@ -19,16 +19,11 @@ public:
                 }
                 if(!st.empty())
                 {
-                    res.push_back(st.top()-i);
-                }
-                else
-                {
-                    res.push_back(0);
+                    res[i]=st.top()-i;
                 }
                 st.push(i);
             }
         }
-        reverse(res.begin(),res.end());
         return res;
     }
 };
