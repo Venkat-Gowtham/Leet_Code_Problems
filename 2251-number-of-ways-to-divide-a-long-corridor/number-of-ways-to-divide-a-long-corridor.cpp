@@ -17,9 +17,7 @@ int mod=1e9+7;
                 f=0;
             }
         }
-        if(c==0)return 0;
-        // if(c%2==0)return 1;
-        if(c%2)return 0;
+        if(c==0 or c%2)return 0;
         return ans;
     }
 };
