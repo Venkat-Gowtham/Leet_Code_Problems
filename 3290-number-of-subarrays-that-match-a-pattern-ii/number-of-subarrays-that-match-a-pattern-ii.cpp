@@ -10,9 +10,9 @@ public:
         }
         for(int i=0;i<pattern.size();i++)
         {
-            if(pattern[i]==1) pat+="1";
+            if(pattern[i]==-1) pat+="2";
             else if(pattern[i]==0)pat+="0";
-            else pat+="2";
+            else pat+="1";
         }
         int i=0,j=1,cnt=0;
         vector<int>lps(pat.size(),0);
