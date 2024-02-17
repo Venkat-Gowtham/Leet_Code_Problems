@@ -4,45 +4,45 @@ public:
     vector<int>par;
     int findd(int u)
     {
-        if(par[u]==u)return u;
-        return par[u]=findd(par[u]);
+        if(par[u] == u ) return u;
+        return par[u] = findd(par[u]);
     }
     void unionn(int u, int v)
     {
-        int up=findd(u);
-        int vp=findd(v);
-        // if(up==vp)
+        int up = findd(u);
+        int vp = findd(v);
+
         if(rank[up]>=rank[vp])
         {
-            par[vp]=up;
-            rank[up]+=rank[vp];
+            par[vp] = up;
+            rank[vp] += rank[up];
         }
         else
-         {
-            par[up]=vp;
-            rank[vp]+=rank[up];
+        {
+            par[up] = vp;
+            rank[up] += rank[vp];
         }
+
     }
     vector<int> findRedundantConnection(vector<vector<int>>& edges) {
-        // intializing
-        rank.resize(edges.size()+1);
-        par.resize(edges.size()+1);
-        for(int i=1;i<=edges.size();i++)
+        int n = edges.size();
+        rank.resize(n+1);
+        par.resize(n+1);
+        for( int i = 1 ; i<=n; i++)
         {
-            rank[i] = 1;
             par[i] = i;
+            rank[i] = 1;
         }
-        int l = -1;
-        for(int i=0;i<edges.size();i++)
+        int last_index = -1;
+        for( int i = 0 ;i < n ; i++ )
         {
-           int u=edges[i][0];
-           int v=edges[i][1];
-           int up=findd(u);
-           int vp=findd(v);
-        //    if(up!=vp)unionn(u,v);
-           if(up!=vp)unionn(up,vp);
-           else l=i;
+            int u = edges[i][0];
+            int v = edges[i][1];
+            int up = findd(u);
+            int vp = findd(v);
+            if(up!=vp) unionn(u,v);
+            else last_index = i;
         }
-        return edges[l];
+        return edges[last_index];
     }
 };
