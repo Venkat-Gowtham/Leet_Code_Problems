@@ -20,8 +20,8 @@ public:
             int s = st.size();
             for(int i = 0; i<s;i++)
             {
-                if(i==0)last = st.front()->val;
-                TreeNode * cur = st.front();
+                 TreeNode * cur = st.front();
+                if(i==0)last = cur->val;
                 st.pop();
                 if(cur->left)st.push(cur->left);
                 if(cur->right)st.push(cur->right);
