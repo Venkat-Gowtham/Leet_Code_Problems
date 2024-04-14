@@ -1,30 +1,30 @@
+#define ll long long 
 class Solution {
-	public:
-	vector<vector<unordered_map<int,int>>> dp;
-	int helper(vector<int>& nums, vector<int>& andValues, int cur, int andCur, int And){
-		if(cur>=nums.size()){
-			if(andCur>=andValues.size()) return 0;
-			else return 1e8;
-		}
-		else if(andCur>=andValues.size()) return 1e8;
-
-		if(dp[cur][andCur].count(And)) return dp[cur][andCur][And];
-
-		int inclu=1e8;
-		if((And&nums[cur])==andValues[andCur]){
-			inclu = nums[cur] + helper(nums, andValues, cur+1, andCur+1, ((1<<20)-1));
-		}
-		int exclu = helper(nums, andValues, cur+1, andCur, (And&nums[cur]));
-
-		return dp[cur][andCur][And]=min(inclu, exclu);
-	}
-	int minimumValueSum(vector<int>& nums, vector<int>& andValues) {
-		int n=nums.size();
-		dp.resize(n+2, vector<unordered_map<int,int>> (10));
-
-		int ans = helper(nums, andValues, 0, 0, ((1<<19)-1));
-
-		if(ans==1e8) return -1;
-		return ans;
-	}
+public:
+    vector<vector<unordered_map<int,int>>> dp;
+    ll minVal(vector<int>&nums,vector<int>& andVal, ll ind ,ll cur,ll aa){
+        if(ind>=nums.size()){
+            if(aa>=andVal.size()) return 0;
+            return 1e8;
+        }
+        else if(aa>=andVal.size())return 1e8;
+        if(dp[ind][aa].count(cur))return dp[ind][aa][cur]; 
+        // cur = cur&nums[ind];
+        ll l = 1e8 , r= 1e8;
+        if((cur&nums[ind])==andVal[aa]){
+            l=nums[ind]+minVal(nums,andVal,ind+1,(1<<20)-1,aa+1);
+        }
+        r=minVal(nums,andVal,ind+1,(cur&nums[ind]),aa);
+        return dp[ind][aa][cur]=min(l,r);
+        
+    }
+    int minimumValueSum(vector<int>& nums, vector<int>& andValues) {
+        int sum = 0;
+        int n= nums.size();
+        int k = andValues.size();
+        dp.resize(n+2, vector<unordered_map<int,int>> (10));
+       ll x= minVal(nums,andValues,0,(1<<19)-1,0);
+            return x==1e8?-1:x;
+        
+    }
 };
