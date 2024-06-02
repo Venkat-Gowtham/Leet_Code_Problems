@@ -1,6 +1,9 @@
 class Solution {
 public:
     int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        ios_base::sync_with_stdio(false);
+        cout.tie(NULL);
+        cin.tie(NULL);
             int ind = 0 , upto = 0 , i=0;
             for(i =0;i<gas.size();i++){
                 if(upto+gas[i]-cost[i]<0){
