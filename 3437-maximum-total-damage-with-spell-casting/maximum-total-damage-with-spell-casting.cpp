@@ -1,31 +1,24 @@
 class Solution {
-public:
-    #define ll  long long 
-    ll  maxPower(vector<int>&power , int ind , unordered_map<int ,ll >&mp,vector<ll >&dp){
+private:
+    #define ll long long 
+    ll maxPower(vector<int>&power , int ind , unordered_map<int,ll>&mp,vector<ll>&dp){
         if(ind<0)return 0;
         if(dp[ind]!=-1)return dp[ind];
         int  f = 0;
-        ll  left = power[ind] * mp[power[ind]];
-        ll   right = maxPower(power,ind-1,mp,dp);
-          if(ind>=1 and power[ind]-power[ind-1]==1){
-
+        ll left = power[ind] * mp[power[ind]];
+        ll  right = maxPower(power,ind-1,mp,dp);
+          if(ind>=1 and power[ind]-power[ind-1]<=2){
             if(ind>=2 and power[ind]-power[ind-2]==2){
                {f=1; left  += maxPower(power,ind-3,mp,dp);}
             }
             else {f=1;left += maxPower(power,ind-2,mp,dp);}
           }
-          else{
-            if(ind>0 and power[ind]-power[ind-1]==2){
-                left+=maxPower(power,ind-2,mp,dp);
-            }
-            else{
-                left+=maxPower(power,ind-1,mp,dp);
-            }
-          }
+          if(!f) left += right;
         return dp[ind]=max(left,right);      
     }
+    public:
     long long maximumTotalDamage(vector<int>& power) {
-        unordered_map<int  ,ll >mp;
+        unordered_map<int ,ll>mp;
         for(auto it : power){
             mp[it]++;
         }
@@ -34,7 +27,7 @@ public:
             uni.push_back(it.first);
         }
         sort(uni.begin(),uni.end());
-        vector<ll >dp(uni.size(),-1);
+        vector<ll>dp(uni.size(),-1);
        
         return maxPower(uni,uni.size()-1,mp,dp);
         
