@@ -20,7 +20,6 @@ public:
         for(int i = n-k+1;i<n;i++){
             pre[i]+=pre[i-1];
         }
-        for(int i = 0;i<n;i++)cout<<pre[i]<<" ";
         for(int i = 0;i<n;i++){
             if(nums[i]==1 and pre[i]%2!=0){
                 return -1;
