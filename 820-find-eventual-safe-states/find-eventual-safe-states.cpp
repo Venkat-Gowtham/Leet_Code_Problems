@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int dfs(vector<int>adj[] , int node , vector<int>&vis,vector<int>&dp){
+    int dfs(vector<vector<int>>&adj , int node , vector<int>&vis,vector<int>&dp){
         if(adj[node].size()==0){
             return dp[node]=1;
         }
@@ -17,15 +17,9 @@ public:
         }
         return dp[node]=cnt;
     }
-    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
-        int n = graph.size();
-        vector<int>adj[n];
+    vector<int> eventualSafeNodes(vector<vector<int>>& adj) {
+        int n = adj.size();
         vector<int>ans;
-        for(int i = 0;i<n;i++){
-            for(auto it : graph[i]){
-                adj[i].push_back(it);
-            }
-        }
         vector<int>vis(n,0),dp(n,0);
         for(int i = 0;i<n;i++){
             if(!vis[i]){
