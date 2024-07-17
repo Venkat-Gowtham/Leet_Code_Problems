@@ -10,19 +10,19 @@
  * };
  */
 class Solution {
-public:
     int res = INT_MIN;
+public:
+    
     int findpath(TreeNode *root){
-        if(!root)return INT_MIN;
-        if(!root->left and !root->right)return root->val;
-        int l = findpath(root->left);
-        int r = findpath(root->right);
-        if(l!=INT_MIN and r!=INT_MIN) res = max(res,root->val+l+r);
-        res=max({res,l,r});
-        return max({l!=INT_MIN?l+root->val:root->val,root->val,r!=INT_MIN?root->val+r:root->val});
+        if(!root)return 0;
+        int l = max(0,findpath(root->left));
+        int r = max(0,findpath(root->right));
+        res=max(res,root->val+l+r);
+        return root->val+max(l,r);
     }
     int maxPathSum(TreeNode* root) {
-        cout<<res;
+        // cout<<res;
         return max(res,findpath(root));
+        // return res;
     }
 };
