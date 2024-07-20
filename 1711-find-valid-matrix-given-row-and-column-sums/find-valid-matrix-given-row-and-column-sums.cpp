@@ -5,8 +5,9 @@ public:
         int m = row.size() , n = col.size();
         for(int i = 0;i<m;i++){
             for(int j = 0;j<n;j++){
-                int y = min(row[i],col[j]);
-                ans[i][j]+=y;col[j]-=y; row[i]-=y; 
+                ans[i][j]=min(row[i],col[j]);
+                col[j]-=ans[i][j];
+                row[i]-=ans[i][j]; 
             }
         }
         return ans;
