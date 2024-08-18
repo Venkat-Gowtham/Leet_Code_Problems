@@ -1,14 +1,14 @@
 class Solution {
 public:
-    bool isPalindrome(const std::string& num) {
-    int len = num.length();
-    for (int i = 0; i < len / 2; ++i) {
-        if (num[i] != num[len - i - 1]) {
-            return false;
-        }
-    }
-    return true;
-}
+//     bool isPalindrome(const string& num) {
+//     int len = num.length();
+//     for (int i = 0; i < len / 2; ++i) {
+//         if (num[i] != num[len - i - 1]) {
+//             return false;
+//         }
+//     }
+//     return true;
+// }
     string for4(int n){
         if(n==1)return "8";
         if(n==2) return "88";
@@ -61,7 +61,7 @@ public:
         else s+="77"+rev;
         return s;
     }
-    std::string decrementHalf(std::string half) {
+    string decrementHalf(string half) {
     int len = half.size();
     for (int i = len - 1; i >= 0; --i) {
         if (half[i] > '0') {
@@ -74,7 +74,7 @@ public:
     return half;
 }
 
-bool isDivisibleBy7(const std::string& num) {
+bool isDivisibleBy7(const string& num) {
     int remainder = 0;
     for (char digit : num) {
         remainder = (remainder * 10 + (digit - '0')) % 7;
@@ -82,19 +82,19 @@ bool isDivisibleBy7(const std::string& num) {
     return remainder == 0;
 }
 
-std::string for7(int n) {
+string for7(int n) {
     if (n == 1) {
         return "7";
     }
 
-    std::string half = std::string((n + 1) / 2, '9');
+    string half = string((n + 1) / 2, '9');
 
     while (true) {
-        std::string palindrome;
+       string palindrome;
         if (n % 2 == 0) {
-            palindrome = half + std::string(half.rbegin(), half.rend());
+            palindrome = half +string(half.rbegin(), half.rend());
         } else {
-            palindrome = half + std::string(half.rbegin() + 1, half.rend());
+            palindrome = half + string(half.rbegin() + 1, half.rend());
         }
 
         if (isDivisibleBy7(palindrome)) {
@@ -103,7 +103,7 @@ std::string for7(int n) {
 
         half = decrementHalf(half);
 
-        if (half == std::string(half.size(), '0')) {
+        if (half == string(half.size(), '0')) {
             break;
         }
     }
