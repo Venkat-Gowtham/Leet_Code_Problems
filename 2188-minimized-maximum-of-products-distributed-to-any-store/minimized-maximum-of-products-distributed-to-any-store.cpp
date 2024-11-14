@@ -14,7 +14,7 @@ public:
     }
     int minimizedMaximum(int n, vector<int>& quantities) {
         long long l = 1 , h= 1e6 , res = 1e6;
-        long long  ma = accumulate(begin(quantities),end(quantities),1LL*0);
+        long long  ma = *max_element(begin(quantities),end(quantities));
         h=ma;
         while(l<=h){
             long long  mid = l+(h-l)/2;
