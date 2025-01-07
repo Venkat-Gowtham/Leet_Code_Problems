@@ -1,25 +1,27 @@
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
-        int p=nums.size()-1;
-        int q=nums.size()-2;
-        while(q>=0){
-           
-            if(nums[p]>nums[q]){
-               break;
+        int j = nums.size()-1;
+        int i = nums.size()-2;
+        int n = nums.size();
+        // find bep from back
+        int bf = -1;
+        while(i>=0){
+            if(nums[i]<nums[j]){
+                bf = i;
+                break;
             }
-            p--;
-            q--;
+            i--;
+            j--;
         }
-        if(q<0){
-            reverse(nums.begin(),nums.end());
-            return ;
+        if(bf == -1) {reverse(begin(nums),end(nums));return;}
+        //find nxt greater ele for starting point after common prefix 
+        for(int ii = n-1;ii>=i;ii--){
+            if(nums[ii]>nums[i]){
+                swap(nums[ii],nums[i]);
+                break;
+            }
         }
-        int ma = q;
-        for(int i = q+1;i<nums.size();i++){
-            if(nums[i]>nums[q])ma=i;
-        }
-        swap(nums[ma],nums[q]);
-        reverse(nums.begin()+q+1,end(nums));
+        reverse(nums.begin()+i+1,nums.end());
     }
 };
