@@ -7,7 +7,6 @@ public:
             c+=num2%2;
             num2/=2;
         }
-        cout<<c;
         int res = 0;
         for(int i = 31;i>=0;i--){
             if((1<<i)&num1){
