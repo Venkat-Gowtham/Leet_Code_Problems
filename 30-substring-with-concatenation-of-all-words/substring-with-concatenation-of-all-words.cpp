@@ -11,7 +11,6 @@ public:
         vector<int> res,indx;
         unordered_set<int>st;
         int l = words[0].length();
-        // cout<<l<<endl;
         int n = s.length();
         for (auto it : words) {
             mp[it]++;
@@ -24,7 +23,6 @@ public:
                 temp += s[j];
             }
             if (mp.find(temp)!=mp.end()) {
-                // cout<<i<<" psuhed"<<endl;
                 indx.push_back(i);
             }
         }
@@ -33,11 +31,9 @@ public:
         for (int p = 0; p < indx.size(); p++) {
             if (visited.find(indx[p]) == visited.end()) {
                 visited[indx[p]]++;
-                // cout<<"setting "<<indx[p]<<endl;
                 int i = indx[p], j = indx[p];
                 mp=np;
                 if (i + k <=n) {
-
                     string cur = "";
                     int f = 0;
                     while (j <n) {
@@ -55,7 +51,6 @@ public:
                                         i = i + l;
                                     }
                                     visited[i]=1;
-                                    // cout<<j+1-l<<" is visit"<<endl;
                                 }
                             }
                             cur="";
@@ -66,9 +61,6 @@ public:
                             i=i+l;
                             mp[sub]++;
                             visited[i]=1;
-
-                            // cout<<i<<" "<<j<<endl;
-                            // break;
                         }
                         j++;
                     }
