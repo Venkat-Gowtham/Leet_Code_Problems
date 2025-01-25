@@ -69,9 +69,6 @@ public:
                 } else
                     break;
             }
-            else{
-                // cout<<indx[p]<<" alre"<<endl;
-            }
         }
 
         return vector<int>(st.begin(),st.end());
