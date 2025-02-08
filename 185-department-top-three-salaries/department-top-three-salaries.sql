@@ -1,18 +1,29 @@
 # Write your MySQL query statement below
 with sub as (
-        select * from 
-    (
-        select *, dense_rank() over (partition by departmentId order by salary desc ) as rnk
-        from employee
-    ) ranked
-    where ranked.rnk <=3
+       select 
+       d.name as Department ,
+       e.name as Employee,
+       e.salary as salary,
+       Dense_rank() over (Partition by e.departmentId order by salary desc) as rnk
+       from Employee e 
+       join department d on e.departmentId  = d.id
 )
 
-select d.name as Department , sub.name as Employee, sub.salary as Salary from department d
-inner join sub 
-on d.id = sub.departmentId
--- on department.id = sub.departmentId
 
--- on employee.departmentId = department.id
--- order by departmentId
--- group by departmentId
+select Department , Employee,Salary 
+from sub 
+where rnk<=3
+
+
+-- WITH cte AS (
+--       SELECT 
+--         d.name AS Department,
+--         e.name AS Employee,
+--         e.salary AS Salary,
+--         DENSE_RANK() OVER (PARTITION BY e.departmentId  ORDER BY Salary DESC) AS rnk
+--     FROM Employee e
+--     JOIN Department d ON e.departmentId = d.id )
+
+-- SELECT Department, Employee, Salary
+-- FROM cte
+-- WHERE rnk <=3
