@@ -2,16 +2,11 @@ class Solution {
 public:
     long long countBadPairs(vector<int>& nums) {
         #define int long long
-        map<int,int>res;
+        unordered_map<int,int>res;
         for(int i=0;i<nums.size();i++){
             res[nums[i]-i]++;
         }
-        //4 0 1 0
         long long  c=0;
-        for(auto it : res){
-
-            cout<<it.first<< " "<<it.second<<endl;
-        }
         for(int i=0;i<nums.size();i++){
             if(res[nums[i]-i]==1){
                 c+=nums.size()-1-i;
