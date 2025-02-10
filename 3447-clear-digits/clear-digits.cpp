@@ -14,7 +14,6 @@ public:
        string res;
        for(int i = 0;i<s.length();i++){
         if(sett.find(i)==sett.end()){
-            cout<<i<<endl;
             res+=s[i];
         }
        }
