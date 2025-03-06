@@ -11,38 +11,54 @@
 class Solution {
 public:
     ListNode* partition(ListNode* head, int x) {
-        ListNode *temp = head , *prev = nullptr,*less=nullptr,*lp=nullptr,*pr=nullptr,*ct;
-    while(temp){
-        ListNode * cur = temp;
-        while(cur and cur->val<x){
-            pr=cur;
-            cur = cur->next;
-        }
-        if(cur!=temp){
-            if(!less){
-                less=temp;
-                lp=pr;
+
+        if(head == nullptr || head->next==nullptr) return head;
+        ListNode* small = nullptr;
+        ListNode* smalltail=nullptr;
+
+        ListNode* big = nullptr;
+        ListNode* bigtail=nullptr;
+
+        ListNode* cur=head;
+
+        while(cur != nullptr){
+            if(cur -> val < x){
+                ListNode* newone=new ListNode;
+                newone->val=cur->val;
+                newone->next=nullptr;
+
+                if(small == nullptr){
+                    small = newone;
+                    smalltail=newone;
+                }
+                else {
+                    smalltail->next=newone;
+                    smalltail=smalltail->next;
+                }
             }
-            else{
-                lp->next = temp;
-                lp = pr;
+            else if(cur -> val >= x){
+                ListNode* newone=new ListNode;
+                newone->val=cur->val;
+                newone->next=nullptr;
+                if(big == nullptr){
+                    big = newone;
+                    bigtail=newone;
+                }
+                else {
+                    bigtail->next=newone;
+                    bigtail=bigtail->next;
+                }
             }
-            temp=cur;
+            cur=cur->next;
         }
-        else{
-            if(!prev){prev=cur;ct=prev;}
-           else {ct->next=cur;
-            ct=ct->next;}
-            temp=temp->next;
-        }
-       
-    }
-    if(lp){
-        cout<<lp->val;
-        lp->next=prev;
-        if(ct)ct->next=nullptr;
-        head=less;
-    }
-    return head;
+        
+
+        
+        if(small == nullptr) return big;
+        else  smalltail->next=big;
+
+        return small;
+
+
     }
 };
